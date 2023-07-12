@@ -16,6 +16,11 @@ class NewsService{
     update(_id,news){
         return NewsRepository.findByIdAndUpdate(_id, news);
     }
+
+    delete(_id){
+        return NewsRepository.findByIdAndRemove(_id);
+
+    }
 }
 
 export default new NewsService();
