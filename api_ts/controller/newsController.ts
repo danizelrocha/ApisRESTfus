@@ -1,15 +1,17 @@
-import newsService from "../services/newsService";
+import NewsService from "../services/newsService";
 import * as HttpStatus from "http-status";
+
+import Helper from "../infra/helper";
 
 class NewsController {
 
     sendResponse = function (res, statusCode, data) {
         res.status(statusCode).json({ result: data });
-    }
+    };
 
     get(req, res) {
-        newsService.get()
-            .then(news => this.sendResponse(res, HttpStatus.OK, news))
+        NewsService.get()
+            .then(news => Helper.sendResponse(res, HttpStatus.OK, news))
             .catch(error => console.error.bind(console, `Error ${error}`));
     }
 
@@ -17,8 +19,8 @@ class NewsController {
 
         const _id = req.params.id;
 
-        newsService.getById(_id)
-            .then(news => this.sendResponse(res, HttpStatus.OK, news))
+        NewsService.getById(_id)
+            .then(news => Helper.sendResponse(res, HttpStatus.OK, news))
             .catch(error => console.error.bind(console, `Error ${error}`));
     }
 
@@ -26,9 +28,9 @@ class NewsController {
 
         let vm = req.body;
 
-        newsService.create(vm)
+        NewsService.create(vm)
             .then(news =>
-                this.sendResponse(res, HttpStatus.OK, "Noticia cadastrada com sucesso!")
+             Helper.sendResponse(res, HttpStatus.OK, "Noticia cadastrada com sucesso!")
             )
             .catch(error => console.error.bind(console, `Error ${error}`));
     }
@@ -37,9 +39,9 @@ class NewsController {
         const _id = req.params.id;
         let news = req.body;
 
-        newsService.update(_id, news)
+        NewsService.update(_id, news)
             .then(news =>
-                this.sendResponse(res, HttpStatus.OK, ` ${news.title} foi atualiza com sucesso`)
+                Helper.sendResponse(res, HttpStatus.OK, ` ${news.title} foi atualiza com sucesso`)
             )
             .catch(error => console.error.bind(console, `Error ${error}`));
     }
@@ -47,13 +49,13 @@ class NewsController {
     delete(req, res) {
         const _id = req.params.id;
 
-        newsService.delete(_id)
+        NewsService.delete(_id)
             .then(() => {
-                this.sendResponse(res, HttpStatus.OK, 'Noticia deletada com sucesso!');
+                Helper.sendResponse(res, HttpStatus.OK, 'Noticia deletada com sucesso!');
             })
             .catch(error => {
                 console.error(`Error ${error}`);
-                this.sendResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, 'Erro ao deletar a notícia.');
+                Helper.sendResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, 'Erro ao deletar a notícia.');
             });
     }
 

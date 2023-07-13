@@ -8,7 +8,6 @@ class StartUp {
         this.routes();
     }
 
-
     routes() {
         this.app.route('/').get((req, res) => {
             res.send({ versao: '0.0.1' })
@@ -16,7 +15,5 @@ class StartUp {
     }
 
 }
-
-
 
 export default new StartUp();
