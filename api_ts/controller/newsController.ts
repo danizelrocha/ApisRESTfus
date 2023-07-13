@@ -5,17 +5,17 @@ import Helper from "../infra/helper";
 
 class NewsController {
 
-    sendResponse = function (res, statusCode, data) {
+    sendResponse = function (res: any, statusCode: any, data: any) {
         res.status(statusCode).json({ result: data });
     };
 
-    get(req, res) {
+    get(req: any, res: any) {
         NewsService.get()
             .then(news => Helper.sendResponse(res, HttpStatus.OK, news))
             .catch(error => console.error.bind(console, `Error ${error}`));
     }
 
-    getById(req, res) {
+    getById(req:any, res:any) {
 
         const _id = req.params.id;
 
@@ -24,7 +24,7 @@ class NewsController {
             .catch(error => console.error.bind(console, `Error ${error}`));
     }
 
-    create(req, res) {
+    create(req: any, res: any) {
 
         let vm = req.body;
 
@@ -35,18 +35,22 @@ class NewsController {
             .catch(error => console.error.bind(console, `Error ${error}`));
     }
 
-    update(req, res) {
+    update(req: any, res: any) {
         const _id = req.params.id;
         let news = req.body;
 
         NewsService.update(_id, news)
             .then(news =>
-                Helper.sendResponse(res, HttpStatus.OK, ` ${news.title} foi atualiza com sucesso`)
+                Helper.sendResponse(
+                    res,
+                    HttpStatus.OK,
+                    'Noticia foi atualiza com sucesso'
+                )
             )
             .catch(error => console.error.bind(console, `Error ${error}`));
     }
 
-    delete(req, res) {
+    delete(req: any, res: any) {
         const _id = req.params.id;
 
         NewsService.delete(_id)
