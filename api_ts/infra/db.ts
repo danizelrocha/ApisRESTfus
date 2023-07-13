@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 
-class Db{
+class Database {
     private DB_URL = "mongodb://localhost:27017/bd_portal";
 
     createConnection() {
@@ -8,4 +8,4 @@ class Db{
     }
 }
 
-export default Db;
+export default Database;
