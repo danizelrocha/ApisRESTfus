@@ -5,13 +5,17 @@ import Database from "./infra/db";
 import NewsController from "./controller/newsController";
 
 class StartUp {
+
     public app: express.Application;
     private _db:Database;
+    private bodyParser;
 
     constructor() {
         this.app = express();
+
         this._db = new Database();
         this._db.createConnection();
+        
         this.middler();
         this.routes();
     }
