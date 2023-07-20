@@ -3,7 +3,7 @@ services:
   api_dev:
     image: danielrocha77/api-ts
     ports:
-      - "5000:3050"
+      - "3050:3050"
     links:
       - link-db
   link-db:
@@ -13,3 +13,5 @@ services:
       - "28017:28017"
     environment:
       - AUTH=no
+
+
